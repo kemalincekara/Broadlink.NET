@@ -25,6 +25,7 @@ namespace Broadlink.NET
         public event EventHandler<byte[]> OnRawData;
         public event EventHandler<byte[]> OnRawRFDataFirst;
         public event EventHandler<byte[]> OnRawRFDataSecond;
+        public event EventHandler<byte[]> OnSentDataCallback;
         #endregion
         #region " Fields "
         private TimerMy timerCheckRFData;
@@ -53,6 +54,9 @@ namespace Broadlink.NET
                     var temperatureData = payload.Slice(0x04, 0x05);
                     var temperature = temperatureData[0] + (float)temperatureData[1] / 10;
                     OnTemperature?.Invoke(this, temperature);
+                    break;
+                case 2:
+                    OnSentDataCallback?.Invoke(this, payload.Slice(0x04));
                     break;
                 case 4: //get from check_data
                     await ExitLearningModeAsync();
@@ -83,8 +87,8 @@ namespace Broadlink.NET
         }
         private async Task CheckRFDataFirstAsync() => await SendAsync(PacketGenerator.GenerateCheckRFDataFirstPacket(this));
         private async Task CheckRFDataSecondAsync() => await SendAsync(PacketGenerator.GenerateCheckRFDataSecondPacket(this));
-        private async Task ExitRFLearningAsync() => await SendAsync(PacketGenerator.GenerateCancelRFSweepPacket(this));
-        private async Task ExitIRLearningModeAsync() => await SendAsync(PacketGenerator.GenerateExitLearningModePacket(this));
+        private async Task ExitRFLearningModeAsync() => await SendAsync(PacketGenerator.GenerateExitRFLearningModePacket(this));
+        private async Task ExitIRLearningModeAsync() => await SendAsync(PacketGenerator.GenerateExitIRLearningModePacket(this));
         private async Task ReadLearningDataAsync() => await SendAsync(PacketGenerator.GenerateReadLearningModePacket(this));
         #endregion
         #region " Public Methods "
@@ -107,7 +111,7 @@ namespace Broadlink.NET
         /// <returns>Triggered event : <see cref="OnRawData" /></returns>
         public async Task EnterIRLearningModeAsync()
         {
-            await SendAsync(PacketGenerator.GenerateStartLearningModePacket(this));
+            await SendAsync(PacketGenerator.GenerateStartIRLearningModePacket(this));
             timerCheckRFData.Stop();
             timerReadLearningData.Start();
         }
@@ -118,7 +122,7 @@ namespace Broadlink.NET
         /// <returns>Triggered event : <see cref="OnRawData" /></returns>
         public async Task EnterRFLearningModeAsync()
         {
-            await SendAsync(PacketGenerator.GenerateEnterRFSweepLearningModePacket(this));
+            await SendAsync(PacketGenerator.GenerateEnterRFLearningModePacket(this));
             timerReadLearningData.Stop();
             timerCheckRFData.Start();
         }
@@ -131,7 +135,7 @@ namespace Broadlink.NET
         {
             timerCheckRFData.Stop();
             timerReadLearningData.Stop();
-            await ExitRFLearningAsync();
+            await ExitRFLearningModeAsync();
             await ExitIRLearningModeAsync();
         }
         #endregion

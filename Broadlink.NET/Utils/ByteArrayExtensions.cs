@@ -72,6 +72,13 @@ namespace Broadlink.NET
             return restArray;
         }
 
+        public static bool BytesContains(this byte[] source, byte[] pattern)
+        {
+            for (int i = 0; i < source.Length; i++)
+                if (source.Skip(i).Take(pattern.Length).SequenceEqual(pattern))
+                    return true;
+            return false;
+        }
         public static byte[] HexToBytes(this string hex) => Enumerable.Range(0, hex.Length).Where(x => x % 2 == 0).Select(x => Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
         public static string ByteToHex(this byte[] bytes)
         {

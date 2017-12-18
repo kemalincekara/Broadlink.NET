@@ -135,7 +135,7 @@ namespace Broadlink.NET
 
             return packet;
         }
-        public static byte[] GenerateStartLearningModePacket(BroadlinkDevice device)
+        public static byte[] GenerateStartIRLearningModePacket(BroadlinkDevice device)
         {
             var payload = new byte[16];
             payload[0x00] = 0x03;
@@ -164,7 +164,7 @@ namespace Broadlink.NET
             var packet = GenerateCommandPacket(command, payload, device);
             return packet;
         }
-        public static byte[] GenerateExitLearningModePacket(BroadlinkDevice device)
+        public static byte[] GenerateExitIRLearningModePacket(BroadlinkDevice device)
         {
             var payload = new byte[16];
             payload[0x00] = 0x1e;
@@ -173,7 +173,7 @@ namespace Broadlink.NET
             var packet = GenerateCommandPacket(command, payload, device);
             return packet;
         }
-        public static byte[] GenerateEnterRFSweepLearningModePacket(BroadlinkDevice device)
+        public static byte[] GenerateEnterRFLearningModePacket(BroadlinkDevice device)
         {
             var payload = new byte[16];
             payload[0x00] = 0x19;
@@ -200,7 +200,7 @@ namespace Broadlink.NET
             var packet = GenerateCommandPacket(command, payload, device);
             return packet;
         }
-        public static byte[] GenerateCancelRFSweepPacket(BroadlinkDevice device)
+        public static byte[] GenerateExitRFLearningModePacket(BroadlinkDevice device)
         {
             var payload = new byte[16];
             payload[0x00] = 0x1e;

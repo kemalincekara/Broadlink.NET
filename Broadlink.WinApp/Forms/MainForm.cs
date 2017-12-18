@@ -74,6 +74,7 @@ namespace Broadlink.WinApp.Forms
                     RMDevice.OnRawData += RMDevice_OnRawData;
                     RMDevice.OnRawRFDataFirst += RMDevice_OnRawRFDataFirst;
                     RMDevice.OnRawRFDataSecond += RMDevice_OnRawRFDataSecond;
+                    RMDevice.OnSentDataCallback += RMDevice_OnSentDataCallback;
                     RMDevice.IsEventsReady = true;
                 }
                 await RMDevice.AuthorizeAsync();
@@ -186,7 +187,12 @@ namespace Broadlink.WinApp.Forms
             });
             await RMDevice.GetTemperatureAsync();
         }
-
+        private void RMDevice_OnSentDataCallback(object sender, byte[] payload)
+        {
+            var cmd = Commands.FirstOrDefault(item => item.Code.HexToBytes().BytesContains(payload));
+            if (cmd == null) return;
+            HelperMy.Notification(Color.Lime, $"[Callback] {cmd.Name}");
+        }
         #endregion
         #region Helper Methods
         private void KomutYukle()

@@ -11,7 +11,14 @@ namespace Broadlink.OneClick
         static void Main(string[] args)
         {
             if (args == null || args.Length == 0) return;
-            new App(args).Discover().Wait();
+            try
+            {
+                new App(args).Discover().Wait();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
     }
