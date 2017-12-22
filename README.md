@@ -14,7 +14,7 @@ Currently only supports RM devices (Tested with Broadlink RM Pro)
  * Scan devices on the local network
  * Get the temperature
  * IR or RF learning mode
- * OneClick, send commands with ID parameters from the desktop shortcut.
+ * OneClick, send commands with Key parameters from the desktop shortcut.
  * Import data from Broadlink eControl App
 
 Usage OneClick
