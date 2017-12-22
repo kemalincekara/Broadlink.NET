@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ControlExtensionMethods.cs" />
-    <Compile Include="Classes\Extensions.cs" />
     <Compile Include="Classes\Command.cs" />
     <Compile Include="Controls\BetterRichTextBox.cs">
       <SubType>Component</SubType>

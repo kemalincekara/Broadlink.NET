@@ -54,9 +54,6 @@
     <Compile Include="..\Broadlink.WinApp\Classes\Command.cs">
       <Link>Command.cs</Link>
     </Compile>
-    <Compile Include="..\Broadlink.WinApp\Classes\Extensions.cs">
-      <Link>Extensions.cs</Link>
-    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

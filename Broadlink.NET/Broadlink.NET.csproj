@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -45,8 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BroadlinkDevice.cs" />
+    <Compile Include="SharedData\CodeInfo.cs" />
+    <Compile Include="SharedData\JsonButton.cs" />
+    <Compile Include="SharedData\JsonDevice.cs" />
+    <Compile Include="SharedData\JsonIrCode.cs" />
+    <Compile Include="SharedData\JsonSubIr.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Network.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\HelperMy.cs" />
     <Compile Include="PacketGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,5 +73,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

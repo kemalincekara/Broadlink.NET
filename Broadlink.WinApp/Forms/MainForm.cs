@@ -79,7 +79,7 @@ namespace Broadlink.WinApp.Forms
                 }
                 await RMDevice.AuthorizeAsync();
                 KomutYukle();
-                btnMenuOgren.Enabled = cmbKomutListe.Enabled = btnIR_Learn.Enabled = btnRF_Learn.Enabled = btnLearnCancel.Enabled = btnKomutGonder.Enabled = btnKomutlariKaydet.Enabled = true;
+                btnMenuOgren.Enabled = cmbKomutListe.Enabled = btnIR_Learn.Enabled = btnRF_Learn.Enabled = btnLearnCancel.Enabled = btnKomutGonder.Enabled = btnKomutlariKaydet.Enabled = btnIceAktar.Enabled = true;
                 btnConnect.Text = "Bağlanıldı";
             }
             else
@@ -92,15 +92,14 @@ namespace Broadlink.WinApp.Forms
             if (RMDevice == null) return;
             btnIR_Learn.Enabled = false;
             await RMDevice.EnterIRLearningModeAsync();
-            //timerReadLearningData.Start();
-            HelperMy.Notification(Color.Blue, "IR Kızılötesi Öğrenme modu etkinleştirildi.");
+            HelperMy.Notification(Color.RoyalBlue, "IR Kızılötesi Öğrenme modu etkinleştirildi.");
         }
         private async void btnRF_Learn_Click(object sender, EventArgs e)
         {
             if (RMDevice == null) return;
             btnRF_Learn.Enabled = false;
             await RMDevice.EnterRFLearningModeAsync();
-            HelperMy.Notification(Color.Blue, "RF Frekans Öğrenme modu etkinleştirildi.");
+            HelperMy.Notification(Color.RoyalBlue, "RF Frekans Öğrenme modu etkinleştirildi.");
             HelperMy.Notification(Color.Yellow, "RF Frekans Tarama [1/2]");
             HelperMy.Notification(Color.Yellow, "[Düğmeye basılı tutunuz!]");
         }
@@ -109,7 +108,7 @@ namespace Broadlink.WinApp.Forms
             if (RMDevice == null) return;
             btnIR_Learn.Enabled = btnRF_Learn.Enabled = true;
             await RMDevice.ExitLearningModeAsync();
-            HelperMy.Notification(Color.Blue, "Öğrenme modundan çıkıldı.");
+            HelperMy.Notification(Color.RoyalBlue, "Öğrenme modundan çıkıldı.");
         }
         private async void btnKomutGonder_Click(object sender, EventArgs e)
         {
@@ -123,6 +122,42 @@ namespace Broadlink.WinApp.Forms
         }
         private void btnKomutlariKaydet_Click(object sender, EventArgs e) => File.WriteAllText(CommandFilePath, Commands.ToJson(), new System.Text.UTF8Encoding(false));
         private async void timerSicaklik_Tick(object sender, EventArgs e) => await RMDevice?.GetTemperatureAsync();
+        private void btnIceAktar_Click(object sender, EventArgs e)
+        {
+            HelperMy.Notification(Color.RoyalBlue, "Broadlink eControl uygulamasındaki verileri içe aktarma");
+            HelperMy.Notification(Color.White, "1) Uygulamadaki menüden 'Paylaş' butonuna tıklayınız.");
+            HelperMy.Notification(Color.White, "2) 'Ağdaki başka bir telefon ile paylaşın' butonuna tıklayınız.");
+            HelperMy.Notification(Color.White, "3) 'İptal' butonuna tıklayınız.");
+            HelperMy.Notification(Color.White, "4) Telefon hafızasında bulunan aşağıdaki dosyaları bilgisayarınıza kopyalayınız.");
+            HelperMy.Notification(Color.White, "\tKlasör : /broadlink/newremote/SharedData");
+            HelperMy.Notification(Color.White, "\t* jsonDevice");
+            HelperMy.Notification(Color.White, "\t* jsonButton");
+            HelperMy.Notification(Color.White, "\t* jsonIrCode");
+            HelperMy.Notification(Color.White, "\t* jsonSubIr");
+            var model = NET.SharedData.CodeInfo.GetSharedData();
+            if (model == null || model.Length == 0)
+            {
+                HelperMy.Notification(Color.Red, "Veri bulunamadı!");
+                return;
+            }
+            if (Commands == null)
+                Commands = new List<Command>();
+            foreach (var item in model)
+                if (Commands.FirstOrDefault(c => c.ID == item.Id.ToString()) is Command cmd)
+                {
+                    cmd.Name = item.ToString();
+                    cmd.Code = item.Code;
+                }
+                else
+                    Commands.Add(new Command
+                    {
+                        ID = item.Id.ToString(),
+                        Key = item.ToString().FriendlyUrl(),
+                        Name = item.ToString(),
+                        Code = item.Code
+                    });
+            RefreshCmbKomutListe();
+        }
         #endregion
         #region Broadlink.NET Events
         private void HelperMy_NotificationEvent(object sender, (Color Color, string Message, object[] FormatStringArgs) e) => txtLog.MaybeInvoke(() => txtLog.AppendLine(e.Color, e.Message, e.FormatStringArgs));
@@ -198,26 +233,30 @@ namespace Broadlink.WinApp.Forms
         private void KomutYukle()
         {
             Commands = File.Exists(CommandFilePath) ? File.ReadAllText(CommandFilePath, new System.Text.UTF8Encoding(false)).FromJson<List<Command>>().OrderBy(i => i.Name).ToList() ?? new List<Command>() : new List<Command>();
-            cmbKomutListe.Items.Clear();
-            foreach (var item in Commands)
-                cmbKomutListe.Items.Add(item);
-            if (cmbKomutListe.Items.Count > 0)
-                cmbKomutListe.SelectedIndex = 0;
+            RefreshCmbKomutListe();
         }
         private void KomutEkle(string value)
         {
-            var key = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 5);
-            var inputBox = Microsoft.VisualBasic.Interaction.InputBox("Komut başlığı", "İsim giriniz :", key);
+            var inputBox = Microsoft.VisualBasic.Interaction.InputBox("Komut başlığı", "İsim giriniz :");
             if (inputBox.IsNullOrEmptyTrim()) return;
             var cmd = new Command
             {
-                ID = key,
+                ID = Guid.NewGuid().ToString(),
+                Key = inputBox.FriendlyUrl(),
                 Name = inputBox,
                 Code = value
             };
             Commands.Add(cmd);
-            cmbKomutListe.Items.Add(cmd);
-            cmbKomutListe.SelectedIndex = cmbKomutListe.Items.Count - 1;
+            RefreshCmbKomutListe();
+        }
+        private void RefreshCmbKomutListe()
+        {
+            cmbKomutListe.Items.Clear();
+            if (Commands == null || Commands.Count == 0) return;
+            foreach (var item in Commands)
+                cmbKomutListe.Items.Add(item);
+            if (cmbKomutListe.Items.Count > 0)
+                cmbKomutListe.SelectedIndex = 0;
         }
         #endregion
     }

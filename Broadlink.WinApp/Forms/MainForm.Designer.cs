@@ -45,6 +45,8 @@
             this.cmbKomutListe = new System.Windows.Forms.ToolStripComboBox();
             this.txtIRCount = new System.Windows.Forms.ToolStripTextBox();
             this.btnKomutlariKaydet = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnIceAktar = new System.Windows.Forms.ToolStripButton();
             this.timerSicaklik = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new BetterRichTextBox();
             this.toolStrip1.SuspendLayout();
@@ -64,10 +66,12 @@
             this.btnKomutGonder,
             this.cmbKomutListe,
             this.txtIRCount,
-            this.btnKomutlariKaydet});
+            this.btnKomutlariKaydet,
+            this.toolStripSeparator4,
+            this.btnIceAktar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(703, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(805, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -98,7 +102,7 @@
             this.btnConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnConnect.Image")));
             this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(72, 22);
+            this.btnConnect.Size = new System.Drawing.Size(68, 22);
             this.btnConnect.Text = "Tarama Yap";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
@@ -118,27 +122,27 @@
             this.btnMenuOgren.Image = ((System.Drawing.Image)(resources.GetObject("btnMenuOgren.Image")));
             this.btnMenuOgren.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMenuOgren.Name = "btnMenuOgren";
-            this.btnMenuOgren.Size = new System.Drawing.Size(117, 22);
+            this.btnMenuOgren.Size = new System.Drawing.Size(106, 22);
             this.btnMenuOgren.Text = "Yeni Komut Öğren";
             // 
             // btnIR_Learn
             // 
             this.btnIR_Learn.Name = "btnIR_Learn";
-            this.btnIR_Learn.Size = new System.Drawing.Size(185, 22);
+            this.btnIR_Learn.Size = new System.Drawing.Size(172, 22);
             this.btnIR_Learn.Text = "Kızılötesi Öğren";
             this.btnIR_Learn.Click += new System.EventHandler(this.btnIR_Learn_Click);
             // 
             // btnRF_Learn
             // 
             this.btnRF_Learn.Name = "btnRF_Learn";
-            this.btnRF_Learn.Size = new System.Drawing.Size(185, 22);
+            this.btnRF_Learn.Size = new System.Drawing.Size(172, 22);
             this.btnRF_Learn.Text = "RF Frekans Öğren";
             this.btnRF_Learn.Click += new System.EventHandler(this.btnRF_Learn_Click);
             // 
             // btnLearnCancel
             // 
             this.btnLearnCancel.Name = "btnLearnCancel";
-            this.btnLearnCancel.Size = new System.Drawing.Size(185, 22);
+            this.btnLearnCancel.Size = new System.Drawing.Size(172, 22);
             this.btnLearnCancel.Text = "Öğrenme Modu İptal";
             this.btnLearnCancel.Click += new System.EventHandler(this.btnLearnCancel_Click);
             // 
@@ -154,13 +158,14 @@
             this.btnKomutGonder.Image = ((System.Drawing.Image)(resources.GetObject("btnKomutGonder.Image")));
             this.btnKomutGonder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnKomutGonder.Name = "btnKomutGonder";
-            this.btnKomutGonder.Size = new System.Drawing.Size(89, 22);
+            this.btnKomutGonder.Size = new System.Drawing.Size(79, 22);
             this.btnKomutGonder.Text = "Komut Gönder";
             this.btnKomutGonder.Click += new System.EventHandler(this.btnKomutGonder_Click);
             // 
             // cmbKomutListe
             // 
             this.cmbKomutListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKomutListe.DropDownWidth = 200;
             this.cmbKomutListe.Enabled = false;
             this.cmbKomutListe.Name = "cmbKomutListe";
             this.cmbKomutListe.Size = new System.Drawing.Size(121, 25);
@@ -178,9 +183,25 @@
             this.btnKomutlariKaydet.Image = ((System.Drawing.Image)(resources.GetObject("btnKomutlariKaydet.Image")));
             this.btnKomutlariKaydet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnKomutlariKaydet.Name = "btnKomutlariKaydet";
-            this.btnKomutlariKaydet.Size = new System.Drawing.Size(47, 22);
+            this.btnKomutlariKaydet.Size = new System.Drawing.Size(45, 22);
             this.btnKomutlariKaydet.Text = "Kaydet";
             this.btnKomutlariKaydet.Click += new System.EventHandler(this.btnKomutlariKaydet_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnIceAktar
+            // 
+            this.btnIceAktar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnIceAktar.Enabled = false;
+            this.btnIceAktar.Image = ((System.Drawing.Image)(resources.GetObject("btnIceAktar.Image")));
+            this.btnIceAktar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnIceAktar.Name = "btnIceAktar";
+            this.btnIceAktar.Size = new System.Drawing.Size(99, 22);
+            this.btnIceAktar.Text = "eControl İçe Aktar";
+            this.btnIceAktar.Click += new System.EventHandler(this.btnIceAktar_Click);
             // 
             // timerSicaklik
             // 
@@ -195,7 +216,7 @@
             this.txtLog.ForeColor = System.Drawing.Color.White;
             this.txtLog.Location = new System.Drawing.Point(0, 25);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(703, 359);
+            this.txtLog.Size = new System.Drawing.Size(805, 359);
             this.txtLog.TabIndex = 2;
             this.txtLog.Text = "";
             // 
@@ -203,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 384);
+            this.ClientSize = new System.Drawing.Size(805, 384);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -236,5 +257,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnRF_Learn;
         private System.Windows.Forms.ToolStripMenuItem btnLearnCancel;
         private System.Windows.Forms.ToolStripTextBox txtIRCount;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnIceAktar;
     }
 }

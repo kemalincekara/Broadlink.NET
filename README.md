@@ -15,12 +15,16 @@ Currently only supports RM devices (Tested with Broadlink RM Pro)
  * Get the temperature
  * IR or RF learning mode
  * OneClick, send commands with ID parameters from the desktop shortcut.
+ * Import data from Broadlink eControl App
 
 Usage OneClick
 ```
-Broadlink.OneClick.exe lamba +tvsound sleep
+Broadlink.OneClick.exe salon-avize-lamba televizyon-vol+ ...
 ```
- 
+### Dependencies
+ * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+ * [System.ValueTuple](https://www.nuget.org/packages/System.ValueTuple)
+
 ### Thanks
  * https://github.com/wind-rider/broadlink-dotnet
  * https://github.com/mjg59/python-broadlink

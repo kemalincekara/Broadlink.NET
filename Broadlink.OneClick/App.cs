@@ -63,7 +63,7 @@ namespace Broadlink.OneClick
                         {
                             foreach (var i in Args)
                             {
-                                var cmd = commands.FirstOrDefault(j => j.ID == i);
+                                var cmd = commands.FirstOrDefault(j => j.Key == i);
                                 if (cmd != null)
                                 {
                                     await (rm as RMDevice).SendRemoteCommandAsync(cmd.Code.HexToBytes());
