@@ -8,11 +8,6 @@ namespace Broadlink.NET
     /// </summary>
     public class RMDevice : BroadlinkDevice
     {
-        /*   
-            IR_TOKEN = 0x26
-            RF_433_TOKEN = 0xB2
-            RF_315_TOKEN = 0xD7
-        */
         #region " Events "
         /// <summary>
         /// Get the temperature in degrees Celsius

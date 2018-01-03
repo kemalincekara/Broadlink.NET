@@ -64,7 +64,7 @@ namespace Broadlink.NET.SharedData
                                 model.Add(new CodeInfo(device, subIr, button, irCode));
             return model.OrderBy(item => item.ToString()).ToArray();
         }
-        public override string ToString() => $"{RemoteName} - {Name}";
+        public override string ToString() => $"{RemoteName} \u2022 {Name}";
         public static bool IsValid(JsonSubIr jsonSubIr, JsonButton jsonButton, JsonIrCode jsonIrCode) => jsonSubIr.Id != 0 && jsonButton.Id != 0 && jsonIrCode.ButtonId != 0 && jsonSubIr.Id == jsonButton.SubIrId && jsonIrCode.ButtonId == jsonButton.Id && jsonIrCode.CodeHex != null && jsonIrCode.CodeHex.Length > 0;
     }
 }

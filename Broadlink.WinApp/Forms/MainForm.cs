@@ -179,7 +179,7 @@ namespace Broadlink.WinApp.Forms
         {
             this.MaybeInvoke(() =>
             {
-                txtLog.AppendLine(Color.Lime, "OnRawData : {0}", Convert.ToBase64String(data));
+                txtLog.AppendLine(Color.Lime, "OnRawData : {0}", data.ByteToHex());
                 btnIR_Learn.Enabled = btnRF_Learn.Enabled = true;
                 KomutEkle(data.ByteToHex());
             });
